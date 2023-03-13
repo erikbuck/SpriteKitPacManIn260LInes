@@ -1,9 +1,9 @@
 import SpriteKit
 
 
-class PacManScene : SKScene
+class PacManScene : SKScene, SKPhysicsContactDelegate
 {
-   static let pacManRadius = CGFloat(20)
+   static let pacManRadius = CGFloat(10)
    enum Direction : Int { case Up, Down, Left, Right, None }
    
    static let directionVectors = [CGVector(dx: 0, dy: -pacManRadius), // up
@@ -29,24 +29,43 @@ class PacManScene : SKScene
    override func didMove(to view: SKView) {
       pacManNode = self.childNode(withName: "PacManNode") as? SKShapeNode
       pacManNode!.fillColor = UIColor.yellow
+      // Make physics radious slightly smaller so pac man doesn't rub along edges of walls
+      pacManNode!.physicsBody = SKPhysicsBody(circleOfRadius: PacManScene.pacManRadius - 1)
+      physicsWorld.contactDelegate = self
+   }
+   
+   func didBegin(_ contact: SKPhysicsContact) {
+      if contact.bodyA.node?.name == "PacManNode" || contact.bodyB.node?.name == "PacManNode" {
+         pacManNode!.removeAllActions()
+      }
    }
    
    func getConstrainedPosition(position : CGPoint) -> CGPoint {
       let result = CGPoint(x: Int(max(PacManScene.pacManRadius, min(size.width - PacManScene.pacManRadius, position.x))),
                            y: Int(max(-size.height + PacManScene.pacManRadius, min(-PacManScene.pacManRadius, position.y))))
+      
       return result
    }
    
    func movePacMan() {
       let vector = PacManScene.directionVectors[pacManDirection.rawValue]
-      pacManDestination = getConstrainedPosition(position: CGPoint(x: (pacManDestination.x + vector.dx),
-                                  y: (pacManDestination.y + vector.dy)))
+      let candidatePoint = CGPoint(x: (pacManDestination.x + vector.dx),
+                                   y: (pacManDestination.y + vector.dy))
+      pacManDestination = getConstrainedPosition(position:candidatePoint)
+      let existingNode = atPoint(pacManDestination)
+      if "Wall" == existingNode.name {
+         // We can't go there because wall in the way
+         pacManDirection = .None
+         pacManDestination = pacManNode!.position
+      }
       let moveAction = SKAction.move(to: pacManDestination, duration: 0.2)
       moveAction.timingMode = .linear
       pacManNode!.run(moveAction) {
          self.movePacMan()
       }
-      pacManNode!.run(SKAction.rotate(toAngle: PacManScene.directionAnglesRad[pacManDirection.rawValue], duration: 0.06))
+      if pacManDirection != .None {
+         pacManNode!.run(SKAction.rotate(toAngle: PacManScene.directionAnglesRad[pacManDirection.rawValue], duration: 0.06))
+      }
    }
    
    override func update(_ currentTime: TimeInterval) {

@@ -15,6 +15,7 @@
 		9763017829BB91B800BD8CFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9763017629BB91B800BD8CFA /* LaunchScreen.storyboard */; };
 		9763018329BB92C300BD8CFA /* PacMan.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9763018229BB92C300BD8CFA /* PacMan.sks */; };
 		9763018D29BB967000BD8CFA /* PacManScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763018C29BB967000BD8CFA /* PacManScene.swift */; };
+		97F3A00D29BF9B8F008DA277 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F3A00C29BF9B8F008DA277 /* WallNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9763017929BB91B800BD8CFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9763018229BB92C300BD8CFA /* PacMan.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PacMan.sks; sourceTree = "<group>"; };
 		9763018C29BB967000BD8CFA /* PacManScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacManScene.swift; sourceTree = "<group>"; };
+		97F3A00C29BF9B8F008DA277 /* WallNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			children = (
 				9763018229BB92C300BD8CFA /* PacMan.sks */,
 				9763018C29BB967000BD8CFA /* PacManScene.swift */,
+				97F3A00C29BF9B8F008DA277 /* WallNode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97F3A00D29BF9B8F008DA277 /* WallNode.swift in Sources */,
 				9763017029BB91B700BD8CFA /* ViewController.swift in Sources */,
 				9763016C29BB91B700BD8CFA /* AppDelegate.swift in Sources */,
 				9763018D29BB967000BD8CFA /* PacManScene.swift in Sources */,
