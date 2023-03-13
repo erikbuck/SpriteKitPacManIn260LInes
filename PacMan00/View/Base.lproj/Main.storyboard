@@ -16,16 +16,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <skView contentMode="scaleToFill" fixedFrame="YES" sceneName="PacMan.sks" translatesAutoresizingMaskIntoConstraints="NO" id="iKC-UZ-e1J">
+                            <skView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" sceneName="PacMan.sks" translatesAutoresizingMaskIntoConstraints="NO" id="iKC-UZ-e1J">
                                 <rect key="frame" x="34" y="0.0" width="862" height="414"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="NqW-40-ccp" appends="YES" id="RAl-l7-lk9"/>
+                                    <outletCollection property="gestureRecognizers" destination="Kfk-JG-jfz" appends="YES" id="p94-7B-XeU"/>
+                                </connections>
                             </skView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="skView" destination="iKC-UZ-e1J" id="S7I-ba-3yM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="NqW-40-ccp">
+                    <connections>
+                        <action selector="takeMotionFromGestureRecognizer:" destination="BYZ-38-t0r" id="j7d-t4-YPk"/>
+                    </connections>
+                </panGestureRecognizer>
+                <tapGestureRecognizer id="Kfk-JG-jfz">
+                    <connections>
+                        <action selector="takeStopFromGestureRecognizer:" destination="BYZ-38-t0r" id="Tzr-4C-Zoa"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="47.544642857142854" y="107.24637681159422"/>
         </scene>

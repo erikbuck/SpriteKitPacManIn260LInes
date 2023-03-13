@@ -1,20 +1,34 @@
-//
-//  ViewController.swift
-//  PacMan00
-//
-//  Created by wsucatslabs on 3/10/23.
-//
-
 import UIKit
 import SpriteKit
 
 class ViewController: UIViewController {
-
+   @IBOutlet var skView : SKView?
+   
    override func viewDidLoad() {
       super.viewDidLoad()
-      // Do any additional setup after loading the view.
    }
 
+   static let motionDelta = CGFloat(20)
+//   static let pacManMoveSpeed = CGFloat(4)
 
+   @IBAction func takeMotionFrom(gestureRecognizer : UIPanGestureRecognizer) {
+      let velocity = gestureRecognizer.velocity(in: skView)
+      //print("\(velocity)")
+      if velocity.y > ViewController.motionDelta {
+         (skView!.scene as! PacManScene).setPacManDirection(direction: .Up)
+      } else if velocity.y < -ViewController.motionDelta {
+         (skView!.scene as! PacManScene).setPacManDirection(direction: .Down)
+      } else if velocity.x < -ViewController.motionDelta {
+         (skView!.scene as! PacManScene).setPacManDirection(direction: .Left)
+      } else if velocity.x > ViewController.motionDelta {
+         (skView!.scene as! PacManScene).setPacManDirection(direction: .Right)
+      } else {
+         (skView!.scene as! PacManScene).setPacManDirection(direction: .None)
+      }
+   }
+
+   @IBAction func takeStopFrom(gestureRecognizer : UITapGestureRecognizer) {
+      (skView!.scene as! PacManScene).setPacManDirection(direction: .None)
+   }
 }
 

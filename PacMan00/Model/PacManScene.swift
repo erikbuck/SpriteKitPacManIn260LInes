@@ -1,22 +1,52 @@
-//
-//  PacManScene.swift
-//  PacMan00
-//
-//  Created by wsucatslabs on 3/10/23.
-//
-
 import SpriteKit
+
 
 class PacManScene : SKScene
 {
-   let pacManRadius = CGFloat(32)
+   static let pacManRadius = CGFloat(20)
+   enum Direction : Int { case Up, Down, Left, Right, None }
+   
+   static let directionVectors = [CGVector(dx: 0, dy: -pacManRadius), // up
+                                  CGVector(dx: 0, dy: pacManRadius),  // down
+                                  CGVector(dx: -pacManRadius, dy: 0), // left
+                                  CGVector(dx: pacManRadius, dy: 0),  // right
+                                  CGVector(dx: 0, dy: 0),   // none
+   ]
+   
+   static let directionAnglesRad = [CGFloat.pi * -0.5,   // up
+                                    CGFloat.pi * 0.5,    // down
+                                    CGFloat.pi * 1.0,    // left
+                                    CGFloat.pi * 0.0,    // right
+                                    CGFloat.pi * 0.0,    // none
+   ]
+   
    var pacManMouthAngleRad = CGFloat.pi * 0.25
    var pacManNode : SKShapeNode?
    var pacManMouthAngleDeltaRad = CGFloat(-0.05)
+   var pacManDirection = Direction.None
+   var pacManDestination = CGPoint(x: 20, y: -20)
    
    override func didMove(to view: SKView) {
       pacManNode = self.childNode(withName: "PacManNode") as? SKShapeNode
       pacManNode!.fillColor = UIColor.yellow
+   }
+   
+   func getConstrainedPosition(position : CGPoint) -> CGPoint {
+      let result = CGPoint(x: Int(max(PacManScene.pacManRadius, min(size.width - PacManScene.pacManRadius, position.x))),
+                           y: Int(max(-size.height + PacManScene.pacManRadius, min(-PacManScene.pacManRadius, position.y))))
+      return result
+   }
+   
+   func movePacMan() {
+      let vector = PacManScene.directionVectors[pacManDirection.rawValue]
+      pacManDestination = getConstrainedPosition(position: CGPoint(x: (pacManDestination.x + vector.dx),
+                                  y: (pacManDestination.y + vector.dy)))
+      let moveAction = SKAction.move(to: pacManDestination, duration: 0.2)
+      moveAction.timingMode = .linear
+      pacManNode!.run(moveAction) {
+         self.movePacMan()
+      }
+      pacManNode!.run(SKAction.rotate(toAngle: PacManScene.directionAnglesRad[pacManDirection.rawValue], duration: 0.06))
    }
    
    override func update(_ currentTime: TimeInterval) {
@@ -24,9 +54,17 @@ class PacManScene : SKScene
          pacManMouthAngleDeltaRad *= -1.0
       }
       pacManMouthAngleRad += pacManMouthAngleDeltaRad
-
-      let path = UIBezierPath(arcCenter: CGPoint(), radius: pacManRadius, startAngle: pacManMouthAngleRad, endAngle: CGFloat.pi * 2, clockwise: true)
+      
+      let path = UIBezierPath(arcCenter: CGPoint(), radius: PacManScene.pacManRadius, startAngle: pacManMouthAngleRad, endAngle: CGFloat.pi * 2 - pacManMouthAngleRad, clockwise: true)
       path.addLine(to: CGPoint())
       pacManNode!.path = path.cgPath
+   }
+   
+   func setPacManDirection(direction : Direction) {
+      if pacManDirection != direction {
+         pacManDirection = direction
+         pacManNode!.removeAllActions()
+         movePacMan()
+      }
    }
 }
