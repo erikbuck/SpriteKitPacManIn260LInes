@@ -1,5 +1,7 @@
 import SpriteKit
 
+class WallNode : SKSpriteNode {
+}
 
 class PacManScene : SKScene, SKPhysicsContactDelegate
 {
@@ -12,20 +14,19 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
                                   CGVector(dx: pacManRadius, dy: 0),  // right
                                   CGVector(dx: 0, dy: 0),   // none
    ]
-   
    static let directionAnglesRad = [CGFloat.pi * -0.5,   // up
                                     CGFloat.pi * 0.5,    // down
                                     CGFloat.pi * 1.0,    // left
                                     CGFloat.pi * 0.0,    // right
                                     CGFloat.pi * 0.0,    // none
    ]
-   
    var pacManMouthAngleRad = CGFloat.pi * 0.25
    var pacManNode : SKShapeNode?
    var pacManMouthAngleDeltaRad = CGFloat(-0.05)
    var pacManDirection = Direction.None
    var pacManSpeed = CGFloat(10)
    
+   // MARK: - Initialization
    override func didMove(to view: SKView) {
       pacManNode = self.childNode(withName: "PacManNode") as? SKShapeNode
       pacManNode!.fillColor = UIColor.yellow
@@ -35,19 +36,10 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
       pacManNode!.physicsBody!.friction = 0.01
       pacManNode!.physicsBody!.linearDamping = 0.01
       pacManNode!.physicsBody!.angularDamping = 0.01
-      pacManNode!.physicsBody!.collisionBitMask = 0xfe
+      pacManNode!.physicsBody!.collisionBitMask = 0xfe // Don't colllide with Pellets
    }
    
-   func didBegin(_ contact: SKPhysicsContact) {
-      if contact.bodyA.node?.name == "PacManNode" || contact.bodyB.node?.name == "PacManNode" {
-         if contact.bodyA.node?.name == "Pellet" {
-            contact.bodyA.node?.removeFromParent()
-         } else if contact.bodyB.node?.name == "Pellet"{
-            contact.bodyB.node?.removeFromParent()
-         }
-      }
-   }
-   
+   // MARK: - PacMan Movement
    func movePacMan() {
       let vector = PacManScene.directionVectors[pacManDirection.rawValue]
       pacManNode!.physicsBody!.velocity = CGVector(dx: vector.dx * pacManSpeed, dy: vector.dy * pacManSpeed)
@@ -56,7 +48,16 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
       }
    }
    
+   func setPacManDirection(direction : Direction) {
+      if pacManDirection != direction {
+         pacManDirection = direction
+         movePacMan()
+      }
+   }
+
+   // MARK: - Update for every frame
    override func update(_ currentTime: TimeInterval) {
+      // Draw PacMan mouth open and close using Core Graphics
       if pacManMouthAngleRad > CGFloat.pi * 0.35 || pacManMouthAngleRad < 0 {
          pacManMouthAngleDeltaRad *= -1.0
       }
@@ -67,11 +68,14 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
       pacManNode!.path = path.cgPath
    }
    
-   func setPacManDirection(direction : Direction) {
-      if pacManDirection != direction {
-         pacManDirection = direction
-         pacManNode!.removeAllActions()
-         movePacMan()
+   // MARK: - Physics Collisions
+   func didBegin(_ contact: SKPhysicsContact) {
+      if contact.bodyA.node?.name == "PacManNode" || contact.bodyB.node?.name == "PacManNode" {
+         if contact.bodyA.node?.name == "Pellet" {
+            contact.bodyA.node?.removeFromParent()
+         } else if contact.bodyB.node?.name == "Pellet"{
+            contact.bodyB.node?.removeFromParent()
+         }
       }
    }
 }
