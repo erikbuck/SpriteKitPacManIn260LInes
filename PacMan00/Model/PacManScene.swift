@@ -24,19 +24,17 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
    var pacManNode : SKShapeNode?
    var pacManMouthAngleDeltaRad = CGFloat(-0.05)
    var pacManDirection = Direction.None
-   var pacManDestination = CGPoint(x: 20, y: -20)
    var pacManSpeed = CGFloat(10)
    
    override func didMove(to view: SKView) {
       pacManNode = self.childNode(withName: "PacManNode") as? SKShapeNode
       pacManNode!.fillColor = UIColor.yellow
-      // Make physics radious slightly smaller so pac man doesn't rub along edges of walls
-      pacManNode!.physicsBody = SKPhysicsBody(circleOfRadius: PacManScene.pacManRadius - 1)
+      pacManNode!.physicsBody = SKPhysicsBody(circleOfRadius: PacManScene.pacManRadius)
       pacManNode!.physicsBody!.allowsRotation = false
       physicsWorld.contactDelegate = self
-      pacManNode!.physicsBody!.friction = 0
-      pacManNode!.physicsBody!.linearDamping = 0
-      pacManNode!.physicsBody!.angularDamping = 0
+      pacManNode!.physicsBody!.friction = 0.01
+      pacManNode!.physicsBody!.linearDamping = 0.01
+      pacManNode!.physicsBody!.angularDamping = 0.01
    }
    
    func didBegin(_ contact: SKPhysicsContact) {
@@ -45,38 +43,9 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
       }
    }
    
-   func getConstrainedPosition(position : CGPoint) -> CGPoint {
-      let result = CGPoint(x: Int(max(PacManScene.pacManRadius, min(size.width - PacManScene.pacManRadius, position.x))),
-                           y: Int(max(-size.height + PacManScene.pacManRadius, min(-PacManScene.pacManRadius, position.y))))
-      
-      return result
-   }
-   
-   func getWrappedPosition(position : CGPoint) -> CGPoint {
-      var result = position
-      if(position.x < 0) { result.x = position.x + size.width }
-      else if(position.x > size.width) { result.x = position.x - size.width}
-      if(position.y > 0) { result.y = position.y - size.height }
-      else if(position.y < size.height) { result.y = position.y - size.height}
-      
-      return result
-   }
-
    func movePacMan() {
       let vector = PacManScene.directionVectors[pacManDirection.rawValue]
-      let candidatePoint = CGPoint(x: (pacManDestination.x + vector.dx),
-                                   y: (pacManDestination.y + vector.dy))
-      pacManDestination = getConstrainedPosition(position:candidatePoint)
-      
-      let existingNode = atPoint(pacManDestination)
-      if "Wall" == existingNode.name {
-         // We can't go there because wall in the way
-         pacManDirection = .None
-         pacManDestination = pacManNode!.position
-         pacManNode!.physicsBody!.velocity = CGVector()
-      } else {
-         pacManNode!.physicsBody!.velocity = CGVector(dx: vector.dx * pacManSpeed, dy: vector.dy * pacManSpeed)
-      }
+      pacManNode!.physicsBody!.velocity = CGVector(dx: vector.dx * pacManSpeed, dy: vector.dy * pacManSpeed)
       if pacManDirection != .None {
          pacManNode!.run(SKAction.rotate(toAngle: PacManScene.directionAnglesRad[pacManDirection.rawValue], duration: 0.06))
       }
