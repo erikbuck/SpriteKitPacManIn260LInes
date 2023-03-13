@@ -35,11 +35,16 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
       pacManNode!.physicsBody!.friction = 0.01
       pacManNode!.physicsBody!.linearDamping = 0.01
       pacManNode!.physicsBody!.angularDamping = 0.01
+      pacManNode!.physicsBody!.collisionBitMask = 0xfe
    }
    
    func didBegin(_ contact: SKPhysicsContact) {
       if contact.bodyA.node?.name == "PacManNode" || contact.bodyB.node?.name == "PacManNode" {
-         pacManNode!.removeAllActions()
+         if contact.bodyA.node?.name == "Pellet" {
+            contact.bodyA.node?.removeFromParent()
+         } else if contact.bodyB.node?.name == "Pellet"{
+            contact.bodyB.node?.removeFromParent()
+         }
       }
    }
    
