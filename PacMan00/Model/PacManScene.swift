@@ -3,7 +3,7 @@ import SpriteKit
 
 class PacManScene : SKScene, SKPhysicsContactDelegate
 {
-   static let pacManRadius = CGFloat(10)
+   static let pacManRadius = CGFloat(9)
    enum Direction : Int { case Up, Down, Left, Right, None }
    
    static let directionVectors = [CGVector(dx: 0, dy: -pacManRadius), // up
@@ -34,6 +34,9 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
       pacManNode!.physicsBody = SKPhysicsBody(circleOfRadius: PacManScene.pacManRadius - 1)
       pacManNode!.physicsBody!.allowsRotation = false
       physicsWorld.contactDelegate = self
+      pacManNode!.physicsBody!.friction = 0
+      pacManNode!.physicsBody!.linearDamping = 0
+      pacManNode!.physicsBody!.angularDamping = 0
    }
    
    func didBegin(_ contact: SKPhysicsContact) {
