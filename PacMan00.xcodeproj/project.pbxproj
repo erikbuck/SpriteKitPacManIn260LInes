@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0310E35029C15B8700D430CE /* BlinkyC.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E34C29C15B8700D430CE /* BlinkyC.png */; };
+		0310E35129C15B8700D430CE /* BlinkyA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E34D29C15B8700D430CE /* BlinkyA.png */; };
+		0310E35229C15B8700D430CE /* BlinkyB.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E34E29C15B8700D430CE /* BlinkyB.png */; };
+		0310E35329C15B8700D430CE /* BlinkyD.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E34F29C15B8700D430CE /* BlinkyD.png */; };
+		0310E36229C15EB700D430CE /* InkyA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35429C15EB600D430CE /* InkyA.png */; };
+		0310E36329C15EB700D430CE /* ClydeC.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35529C15EB600D430CE /* ClydeC.png */; };
+		0310E36429C15EB700D430CE /* PinkyC.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35629C15EB600D430CE /* PinkyC.png */; };
+		0310E36529C15EB700D430CE /* PinkyD.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35729C15EB600D430CE /* PinkyD.png */; };
+		0310E36629C15EB700D430CE /* ClydeD.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35829C15EB600D430CE /* ClydeD.png */; };
+		0310E36729C15EB700D430CE /* InkyC.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35929C15EB700D430CE /* InkyC.png */; };
+		0310E36829C15EB700D430CE /* PinkyB.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35A29C15EB700D430CE /* PinkyB.png */; };
+		0310E36929C15EB700D430CE /* ClydeA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35B29C15EB700D430CE /* ClydeA.png */; };
+		0310E36A29C15EB700D430CE /* ClydeB.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35C29C15EB700D430CE /* ClydeB.png */; };
+		0310E36B29C15EB700D430CE /* InkyD.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35D29C15EB700D430CE /* InkyD.png */; };
+		0310E36C29C15EB700D430CE /* VulnerableB.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35E29C15EB700D430CE /* VulnerableB.png */; };
+		0310E36D29C15EB700D430CE /* VulnerableA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35F29C15EB700D430CE /* VulnerableA.png */; };
+		0310E36E29C15EB700D430CE /* InkyB.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E36029C15EB700D430CE /* InkyB.png */; };
+		0310E36F29C15EB700D430CE /* PinkyA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E36129C15EB700D430CE /* PinkyA.png */; };
 		9763016C29BB91B700BD8CFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763016B29BB91B700BD8CFA /* AppDelegate.swift */; };
 		9763016E29BB91B700BD8CFA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763016D29BB91B700BD8CFA /* SceneDelegate.swift */; };
 		9763017029BB91B700BD8CFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763016F29BB91B700BD8CFA /* ViewController.swift */; };
@@ -18,6 +36,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0310E34C29C15B8700D430CE /* BlinkyC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlinkyC.png; sourceTree = "<group>"; };
+		0310E34D29C15B8700D430CE /* BlinkyA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlinkyA.png; sourceTree = "<group>"; };
+		0310E34E29C15B8700D430CE /* BlinkyB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlinkyB.png; sourceTree = "<group>"; };
+		0310E34F29C15B8700D430CE /* BlinkyD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlinkyD.png; sourceTree = "<group>"; };
+		0310E35429C15EB600D430CE /* InkyA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InkyA.png; sourceTree = "<group>"; };
+		0310E35529C15EB600D430CE /* ClydeC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClydeC.png; sourceTree = "<group>"; };
+		0310E35629C15EB600D430CE /* PinkyC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkyC.png; sourceTree = "<group>"; };
+		0310E35729C15EB600D430CE /* PinkyD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkyD.png; sourceTree = "<group>"; };
+		0310E35829C15EB600D430CE /* ClydeD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClydeD.png; sourceTree = "<group>"; };
+		0310E35929C15EB700D430CE /* InkyC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InkyC.png; sourceTree = "<group>"; };
+		0310E35A29C15EB700D430CE /* PinkyB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkyB.png; sourceTree = "<group>"; };
+		0310E35B29C15EB700D430CE /* ClydeA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClydeA.png; sourceTree = "<group>"; };
+		0310E35C29C15EB700D430CE /* ClydeB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClydeB.png; sourceTree = "<group>"; };
+		0310E35D29C15EB700D430CE /* InkyD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InkyD.png; sourceTree = "<group>"; };
+		0310E35E29C15EB700D430CE /* VulnerableB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VulnerableB.png; sourceTree = "<group>"; };
+		0310E35F29C15EB700D430CE /* VulnerableA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VulnerableA.png; sourceTree = "<group>"; };
+		0310E36029C15EB700D430CE /* InkyB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InkyB.png; sourceTree = "<group>"; };
+		0310E36129C15EB700D430CE /* PinkyA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkyA.png; sourceTree = "<group>"; };
 		9763016829BB91B700BD8CFA /* PacMan00.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PacMan00.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9763016B29BB91B700BD8CFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9763016D29BB91B700BD8CFA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +127,24 @@
 		9763018129BB91DB00BD8CFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0310E35B29C15EB700D430CE /* ClydeA.png */,
+				0310E35C29C15EB700D430CE /* ClydeB.png */,
+				0310E35529C15EB600D430CE /* ClydeC.png */,
+				0310E35829C15EB600D430CE /* ClydeD.png */,
+				0310E35429C15EB600D430CE /* InkyA.png */,
+				0310E36029C15EB700D430CE /* InkyB.png */,
+				0310E35929C15EB700D430CE /* InkyC.png */,
+				0310E35D29C15EB700D430CE /* InkyD.png */,
+				0310E36129C15EB700D430CE /* PinkyA.png */,
+				0310E35A29C15EB700D430CE /* PinkyB.png */,
+				0310E35629C15EB600D430CE /* PinkyC.png */,
+				0310E35729C15EB600D430CE /* PinkyD.png */,
+				0310E35F29C15EB700D430CE /* VulnerableA.png */,
+				0310E35E29C15EB700D430CE /* VulnerableB.png */,
+				0310E34D29C15B8700D430CE /* BlinkyA.png */,
+				0310E34E29C15B8700D430CE /* BlinkyB.png */,
+				0310E34C29C15B8700D430CE /* BlinkyC.png */,
+				0310E34F29C15B8700D430CE /* BlinkyD.png */,
 				9763018229BB92C300BD8CFA /* PacMan.sks */,
 				9763018C29BB967000BD8CFA /* PacManScene.swift */,
 			);
@@ -155,10 +209,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0310E36529C15EB700D430CE /* PinkyD.png in Resources */,
+				0310E35129C15B8700D430CE /* BlinkyA.png in Resources */,
+				0310E36629C15EB700D430CE /* ClydeD.png in Resources */,
+				0310E36329C15EB700D430CE /* ClydeC.png in Resources */,
 				9763017829BB91B800BD8CFA /* LaunchScreen.storyboard in Resources */,
+				0310E36F29C15EB700D430CE /* PinkyA.png in Resources */,
 				9763018329BB92C300BD8CFA /* PacMan.sks in Resources */,
+				0310E36C29C15EB700D430CE /* VulnerableB.png in Resources */,
+				0310E36729C15EB700D430CE /* InkyC.png in Resources */,
+				0310E35329C15B8700D430CE /* BlinkyD.png in Resources */,
+				0310E36E29C15EB700D430CE /* InkyB.png in Resources */,
+				0310E36829C15EB700D430CE /* PinkyB.png in Resources */,
 				9763017529BB91B800BD8CFA /* Assets.xcassets in Resources */,
+				0310E36429C15EB700D430CE /* PinkyC.png in Resources */,
+				0310E36A29C15EB700D430CE /* ClydeB.png in Resources */,
+				0310E35029C15B8700D430CE /* BlinkyC.png in Resources */,
+				0310E36229C15EB700D430CE /* InkyA.png in Resources */,
+				0310E36D29C15EB700D430CE /* VulnerableA.png in Resources */,
 				9763017329BB91B700BD8CFA /* Main.storyboard in Resources */,
+				0310E36B29C15EB700D430CE /* InkyD.png in Resources */,
+				0310E35229C15B8700D430CE /* BlinkyB.png in Resources */,
+				0310E36929C15EB700D430CE /* ClydeA.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
