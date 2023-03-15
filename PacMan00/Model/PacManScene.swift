@@ -61,6 +61,7 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
    var inkyNode : GhostNode?
    var pinkyNode : GhostNode?
    var clydeNode : GhostNode?
+   var vulnerableGhost : VulnerableGhostNode?
    var pacManNode : SKShapeNode?
    var pacManMouthAngleRad = CGFloat.pi * 0.25  // Arbitrary initial angle
    var pacManMouthAngleDeltaRad = CGFloat(-0.05) // Arbitrary small change
@@ -74,6 +75,8 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
       inkyNode = (childNode(withName: "GhostInky") as? GhostNode)!
       pinkyNode = (childNode(withName: "GhostPinky") as? GhostNode)!
       clydeNode = (childNode(withName: "GhostClyde") as? GhostNode)!
+      vulnerableGhost = (childNode(withName: "GhostVulnerable") as? VulnerableGhostNode)!
+      vulnerableGhost?.removeFromParent()
       
       blinkyNode!.run(makeGhostAction(node: blinkyNode!))
       inkyNode!.run(makeGhostAction(node: inkyNode!))
@@ -127,8 +130,10 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
             contact.bodyB.node?.removeFromParent()
          } else if contact.bodyA.node?.name == "PowerPellet" {
             contact.bodyA.node?.removeFromParent()
+            addChild(vulnerableGhost!)
          } else if contact.bodyB.node?.name == "PowerPellet"{
             contact.bodyB.node?.removeFromParent()
+            addChild(vulnerableGhost!)
          } else if (contact.bodyA.node?.name ?? "").starts(with: "Ghost") ||
                      (contact.bodyB.node?.name ?? "").starts(with: "Ghost") {
             

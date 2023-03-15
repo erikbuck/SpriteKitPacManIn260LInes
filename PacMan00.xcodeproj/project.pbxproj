@@ -36,6 +36,8 @@
 		9763017829BB91B800BD8CFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9763017629BB91B800BD8CFA /* LaunchScreen.storyboard */; };
 		9763018329BB92C300BD8CFA /* PacMan.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9763018229BB92C300BD8CFA /* PacMan.sks */; };
 		9763018D29BB967000BD8CFA /* PacManScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763018C29BB967000BD8CFA /* PacManScene.swift */; };
+		97AD303C29C20E9800FFD797 /* wackawacka.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 97AD303B29C20E9800FFD797 /* wackawacka.mp3 */; };
+		97AD303E29C2120C00FFD797 /* death.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 97AD303D29C2120C00FFD797 /* death.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		9763017929BB91B800BD8CFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9763018229BB92C300BD8CFA /* PacMan.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PacMan.sks; sourceTree = "<group>"; };
 		9763018C29BB967000BD8CFA /* PacManScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacManScene.swift; sourceTree = "<group>"; };
+		97AD303B29C20E9800FFD797 /* wackawacka.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wackawacka.mp3; sourceTree = "<group>"; };
+		97AD303D29C2120C00FFD797 /* death.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = death.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 		9763018129BB91DB00BD8CFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				97AD303D29C2120C00FFD797 /* death.mp3 */,
+				97AD303B29C20E9800FFD797 /* wackawacka.mp3 */,
 				03A5916429C1652E009550B3 /* PowerPelletA.png */,
 				03A5916329C1652E009550B3 /* PowerPelletB.png */,
 				03A5916129C1651C009550B3 /* Pellet.png */,
@@ -222,6 +228,7 @@
 				0310E35129C15B8700D430CE /* BlinkyA.png in Resources */,
 				03A5916229C1651C009550B3 /* Pellet.png in Resources */,
 				0310E36629C15EB700D430CE /* ClydeD.png in Resources */,
+				97AD303C29C20E9800FFD797 /* wackawacka.mp3 in Resources */,
 				0310E36329C15EB700D430CE /* ClydeC.png in Resources */,
 				9763017829BB91B800BD8CFA /* LaunchScreen.storyboard in Resources */,
 				0310E36F29C15EB700D430CE /* PinkyA.png in Resources */,
@@ -233,6 +240,7 @@
 				0310E36E29C15EB700D430CE /* InkyB.png in Resources */,
 				0310E36829C15EB700D430CE /* PinkyB.png in Resources */,
 				03A5916629C1652E009550B3 /* PowerPelletA.png in Resources */,
+				97AD303E29C2120C00FFD797 /* death.mp3 in Resources */,
 				9763017529BB91B800BD8CFA /* Assets.xcassets in Resources */,
 				0310E36429C15EB700D430CE /* PinkyC.png in Resources */,
 				0310E36A29C15EB700D430CE /* ClydeB.png in Resources */,
