@@ -18,20 +18,14 @@ class ViewController: UIViewController {
    @IBAction func takeMotionFrom(gestureRecognizer : UIPanGestureRecognizer) {
       let velocity = gestureRecognizer.velocity(in: skView)
       if velocity.y > ViewController.motionDetectDelta {
-         (skView!.scene as! PacManScene).setPacManDirection(direction: .Up)
+         (skView!.scene as! PacManScene).pacManDirection = .Up
       } else if velocity.y < -ViewController.motionDetectDelta {
-         (skView!.scene as! PacManScene).setPacManDirection(direction: .Down)
+         (skView!.scene as! PacManScene).pacManDirection = .Down
       } else if velocity.x < -ViewController.motionDetectDelta {
-         (skView!.scene as! PacManScene).setPacManDirection(direction: .Left)
+         (skView!.scene as! PacManScene).pacManDirection = .Left
       } else if velocity.x > ViewController.motionDetectDelta {
-         (skView!.scene as! PacManScene).setPacManDirection(direction: .Right)
-      } else {
-         (skView!.scene as! PacManScene).setPacManDirection(direction: .None)
+         (skView!.scene as! PacManScene).pacManDirection = .Right
       }
-   }
-   
-   @IBAction func takeStopFrom(gestureRecognizer : UITapGestureRecognizer) {
-      (skView!.scene as! PacManScene).setPacManDirection(direction: .None)
    }
 }
 
