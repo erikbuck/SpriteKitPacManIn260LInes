@@ -25,6 +25,23 @@ func makeGhostAction(node : GhostNode) -> SKAction {
        }]))
 }
 
+let wackawackaPlaySoundAction = SKAction.playSoundFileNamed("wackawacka", waitForCompletion: false)
+let deathPlaySoundAction = SKAction.playSoundFileNamed("death", waitForCompletion: false)
+
+// Play sound whenever PacMan is in motion
+func makePacManAction(node : SKNode) -> SKAction {
+   let soundRepeatPeriodSeconds = 0.5
+   return SKAction.repeatForever(SKAction.sequence(
+      [SKAction.wait(forDuration: soundRepeatPeriodSeconds),
+       SKAction.run {
+          let dx = node.physicsBody!.velocity.dx
+          let dy = node.physicsBody!.velocity.dy
+          if abs(dx) >= pacManSpeed || abs(dy) >= pacManSpeed {
+             node.run(wackawackaPlaySoundAction)
+          }
+       }]))
+}
+
 class PacManScene : SKScene, SKPhysicsContactDelegate
 {
    static let pacManRadius = CGFloat(9) // Arbitrary small enough to not scrape edges of maze
@@ -69,6 +86,7 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
       pacManNode!.physicsBody!.allowsRotation = false
       pacManNode!.physicsBody!.friction = 0.01 // Arbitrry small to mitigate impacts with mage edges
       pacManNode!.physicsBody!.linearDamping = 0.01 // Arbitrry small to prevent slowdown
+      pacManNode!.run(makePacManAction(node: pacManNode!))
       
       // Pellets have collision category b0001 and collision mask b0000
       // Ghosts have collision category  b0010 and collision mask b0010
@@ -115,7 +133,8 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
                      (contact.bodyB.node?.name ?? "").starts(with: "Ghost") {
             
             // Create expand and "pop" animation using arbitrary scale factors and periods
-            pacManNode!.run(SKAction.sequence([SKAction.scale(to: 1.5, duration: 0.2),
+            pacManNode!.run(SKAction.sequence([deathPlaySoundAction,
+                                               SKAction.scale(to: 1.5, duration: 0.2),
                                                SKAction.scale(to: 0.5, duration: 0.5),
                                                SKAction.removeFromParent()]))
             
