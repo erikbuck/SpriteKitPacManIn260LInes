@@ -9,7 +9,7 @@ let ghostSpeed = CGFloat(10)
 let ghostDecisionPeriodSeconds = 0.2
 let pacManStartPosition = CGPoint(x: 10, y: -10) // Arbitrary not inside maze walls
 
-/// Make the ACtion that controls Ghost behavior. In future, consider different Actions for each ghost so they have "personality".
+/// Make the Action that controls Ghost behavior. In future, consider different Actions for each ghost so they have "personality".
 func makeGhostAction(node : GhostNode) -> SKAction {
    return SKAction.repeatForever(SKAction.sequence(
       [SKAction.wait(forDuration: ghostDecisionPeriodSeconds),
@@ -130,9 +130,11 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
             contact.bodyB.node?.removeFromParent()
          } else if contact.bodyA.node?.name == "PowerPellet" {
             contact.bodyA.node?.removeFromParent()
+            vulnerableGhost!.removeFromParent()
             addChild(vulnerableGhost!)
          } else if contact.bodyB.node?.name == "PowerPellet"{
             contact.bodyB.node?.removeFromParent()
+            vulnerableGhost!.removeFromParent()
             addChild(vulnerableGhost!)
          } else if (contact.bodyA.node?.name ?? "").starts(with: "Ghost") ||
                      (contact.bodyB.node?.name ?? "").starts(with: "Ghost") {
