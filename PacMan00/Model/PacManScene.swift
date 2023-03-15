@@ -66,7 +66,7 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
    var pacManMouthAngleRad = CGFloat.pi * 0.25  // Arbitrary initial angle
    var pacManMouthAngleDeltaRad = CGFloat(-0.05) // Arbitrary small change
    var pacManDirection = Direction.Left { didSet { movePacMan() } }
-
+   
    // MARK: - Initialization
    override func didMove(to view: SKView) {
       physicsWorld.contactDelegate = self
@@ -152,6 +152,11 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
             replaceGhostWithVulnerableGhosts(inkyNode!)
             replaceGhostWithVulnerableGhosts(pinkyNode!)
             replaceGhostWithVulnerableGhosts(clydeNode!)
+         } else if (contact.bodyA.node?.name ?? "").starts(with: "GhostVulnerable") {
+            contact.bodyA.node?.removeFromParent()
+            
+         } else if (contact.bodyB.node?.name ?? "").starts(with: "GhostVulnerable") {
+            contact.bodyB.node?.removeFromParent()
          } else if (contact.bodyA.node?.name ?? "").starts(with: "Ghost") ||
                      (contact.bodyB.node?.name ?? "").starts(with: "Ghost") {
             
