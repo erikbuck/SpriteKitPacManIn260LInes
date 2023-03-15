@@ -3,12 +3,19 @@ import SpriteKit
 
 class ViewController: UIViewController {
    @IBOutlet var skView : SKView?
+   @IBOutlet var scoreLabel : UILabel?
+   var score = 0
    
    override func viewDidLoad() {
       super.viewDidLoad()
       let scene = SKScene(fileNamed: "PacMan")!
       scene.scaleMode = .aspectFit
       skView!.presentScene(scene)
+      
+      NotificationCenter.default.addObserver(forName: Notification.Name("didEatPellet"), object: nil, queue: nil, using: { (_ : Notification) in
+         self.score += 1
+         self.scoreLabel?.text = "\(self.score)"
+      })
     }
    
    static let motionDetectDelta = CGFloat(20)
