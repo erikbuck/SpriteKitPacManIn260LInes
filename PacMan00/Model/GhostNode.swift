@@ -30,7 +30,7 @@ func makeGhostAction(node : GhostNode) -> SKAction {
        }]))
 }
 
-func replaceGhostWithVulnerableGhosts(_ ghost : GhostNode) {
+func replaceGhostWithVulnerableGhost(_ ghost : GhostNode) {
    if nil != ghost.parent {
       let newGhost = PacManScene.vulnerableGhostPrototype!.copy() as! VulnerableGhostNode
       newGhost.invulnerableNode = ghost

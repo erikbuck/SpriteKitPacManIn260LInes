@@ -21,13 +21,15 @@ func makePacManAction(node : SKNode) -> SKAction {
        }]))
 }
 
-//
 func makePacManDeathAction() -> SKAction {
    return SKAction.sequence([deathPlaySoundAction,
                              SKAction.scale(to: 1.5, duration: 0.2),
                              SKAction.scale(to: 0.5, duration: 0.5),
                              SKAction.removeFromParent()])
 }
+
+let infoLabelMoveAction = SKAction.sequence([SKAction.moveBy(x: 0.0, y: 100, duration: 1.0),
+                                             SKAction.fadeOut(withDuration: 0.4), SKAction.removeFromParent()])
 
 class PacManScene : SKScene, SKPhysicsContactDelegate
 {
@@ -57,12 +59,10 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
    // MARK: - Initialization
    override func didMove(to view: SKView) {
       physicsWorld.contactDelegate = self
-      
       PacManScene.vulnerableGhostPrototype = (childNode(withName: "GhostVulnerablePrototype") as? VulnerableGhostNode)!
       PacManScene.eyesPrototype = (childNode(withName: "EyesPrototype") as? SKSpriteNode)!
       PacManScene.infoLabelPrototype = (childNode(withName: "InfoLabelPrototype") as? SKLabelNode)!
-      initGhosts(scene: self, names: ["GhostBlinky", "GhostInky", "GhostPinky", "GhostClyde"])
-      
+      initGhosts(scene: self, names: ["GhostBlinky", "GhostInky", "GhostPinky", "GhostClyde"])      
       pacManNode = (childNode(withName: "PacManNode") as? SKShapeNode)!
       pacManNode!.position = pacManStartPosition
       pacManNode!.physicsBody = SKPhysicsBody(circleOfRadius: PacManScene.pacManRadius)
@@ -100,52 +100,45 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
       path.addLine(to: CGPoint())
       pacManNode!.path = path.cgPath
    }
-
+   
    // MARK: - Info Labls
    func spawnInfoLabel(position: CGPoint, text: String) {
       let newLabel = PacManScene.infoLabelPrototype!.copy() as! SKLabelNode
       newLabel.position = position
       newLabel.text = text
       addChild(newLabel)
-      newLabel.run(SKAction.sequence([SKAction.moveBy(x: 0.0, y: 100, duration: 1.0),
-                                      SKAction.fadeOut(withDuration: 0.4),
-                                      SKAction.removeFromParent()]))
+      newLabel.run(infoLabelMoveAction)
    }
-
+   
    // MARK: - Physics Collisions
    func didBegin(_ contact: SKPhysicsContact) {
-      if contact.bodyA.node?.name == "PacManNode" || contact.bodyB.node?.name == "PacManNode" {
-         if contact.bodyA.node?.name == "Pellet" {
-            contact.bodyA.node?.removeFromParent()
+      var otherNode : SKNode? = nil
+      // If one of the nodes in contact is PacMan, take note of the other node
+      if contact.bodyA.node?.name == "PacManNode" {
+         otherNode = contact.bodyB.node
+      } else if contact.bodyB.node?.name == "PacManNode" {
+         otherNode = contact.bodyA.node
+      }
+      
+      if let validOtherNode = otherNode {
+         if validOtherNode.name == "Pellet" {
             score += 1
+            validOtherNode.removeFromParent()
             NotificationCenter.default.post(Notification(name: Notification.Name("didChangeScore")))
-         } else if contact.bodyB.node?.name == "Pellet"{
-            contact.bodyB.node?.removeFromParent()
-            score += 1
-            NotificationCenter.default.post(Notification(name: Notification.Name("didChangeScore")))
-         } else if contact.bodyA.node?.name == "PowerPellet" {
-            contact.bodyA.node?.removeFromParent()
-            for ghostNode in namedGhosts.values { replaceGhostWithVulnerableGhosts(ghostNode) }
-         } else if contact.bodyB.node?.name == "PowerPellet"{
-            contact.bodyB.node?.removeFromParent()
-            for ghostNode in namedGhosts.values { replaceGhostWithVulnerableGhosts(ghostNode) }
-         } else if (contact.bodyA.node?.name ?? "").starts(with: "GhostVulnerable") {
+         } else if validOtherNode.name == "PowerPellet" {
+            validOtherNode.removeFromParent()
+            for ghostNode in namedGhosts.values { replaceGhostWithVulnerableGhost(ghostNode) }
+         } else if (validOtherNode.name ?? "").starts(with: "GhostVulnerable") {
             score += VulnerableGhostNode.consumptionPoints
-            spawnInfoLabel(position: contact.bodyB.node!.position, text: "\(VulnerableGhostNode.consumptionPoints)")
-            replaceVulnerableGhostWithEyes(contact.bodyA.node as! VulnerableGhostNode)
+            spawnInfoLabel(position: validOtherNode.position, text: "\(VulnerableGhostNode.consumptionPoints)")
+            replaceVulnerableGhostWithEyes(validOtherNode as! VulnerableGhostNode)
             NotificationCenter.default.post(Notification(name: Notification.Name("didChangeScore")))
-         } else if (contact.bodyB.node?.name ?? "").starts(with: "GhostVulnerable") {
-            score += VulnerableGhostNode.consumptionPoints
-            spawnInfoLabel(position: contact.bodyB.node!.position, text: "\(VulnerableGhostNode.consumptionPoints)")
-            replaceVulnerableGhostWithEyes(contact.bodyB.node as! VulnerableGhostNode)
-            NotificationCenter.default.post(Notification(name: Notification.Name("didChangeScore")))
-          } else if (contact.bodyA.node?.name ?? "").starts(with: "Ghost") ||
+         } else if (contact.bodyA.node?.name ?? "").starts(with: "Ghost") ||
                      (contact.bodyB.node?.name ?? "").starts(with: "Ghost") {
-            
-            // Create expand and "pop" animation using arbitrary scale factors and periods
+            // Create "expand and pop" animation using arbitrary scale factors and periods
             pacManNode!.run(makePacManDeathAction())
             
-            // Respawn Pac Man after arbitrary period and restore Pac Man size to default
+            // Respawn PacMan after arbitrary period and restore PacMan size to default
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
                self.pacManNode!.position = pacManStartPosition
                self.pacManNode!.physicsBody!.velocity = CGVector()
