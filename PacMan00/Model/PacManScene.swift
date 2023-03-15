@@ -3,10 +3,32 @@ import SpriteKit
 class WallNode : SKSpriteNode {
 }
 
+class GhostNode : SKSpriteNode {
+}
+
+class VulnerableGhostNode : SKSpriteNode {
+}
+
+func makeGhostAction(node : GhostNode) -> SKAction {
+   return SKAction.repeatForever(SKAction.sequence(
+      [SKAction.wait(forDuration: 0.2),
+       SKAction.run {
+          let dx = node.physicsBody!.velocity.dx
+          let dy = node.physicsBody!.velocity.dy
+          if abs(dx) < 10 && abs(dy) < 10 {
+             let direction = PacManScene.Direction.allCases.randomElement()!
+             var newVelocity = PacManScene.directionVectors[direction.rawValue]
+             newVelocity.dx *= CGFloat(10)
+             newVelocity.dy *= CGFloat(10)
+             node.physicsBody!.velocity = newVelocity
+          }
+       }]))
+}
+
 class PacManScene : SKScene, SKPhysicsContactDelegate
 {
    static let pacManRadius = CGFloat(9)
-   enum Direction : Int { case Up, Down, Left, Right }
+   enum Direction : Int, CaseIterable { case Up, Down, Left, Right }
    
    static let directionVectors = [CGVector(dx: 0, dy: -pacManRadius),     // up
                                   CGVector(dx: 0, dy: pacManRadius),  // down
@@ -23,10 +45,24 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
    var pacManMouthAngleDeltaRad = CGFloat(-0.05)
    var pacManDirection = Direction.Left { didSet { movePacMan() } }
    var pacManSpeed = CGFloat(10)
-   
+   var blinkyNode : GhostNode?
+   var inkyNode : GhostNode?
+   var pinkyNode : GhostNode?
+   var clydeNode : GhostNode?
+
    // MARK: - Initialization
    override func didMove(to view: SKView) {
-      pacManNode = self.childNode(withName: "PacManNode") as? SKShapeNode
+      blinkyNode = (childNode(withName: "Blinky") as? GhostNode)!
+      inkyNode = (childNode(withName: "Inky") as? GhostNode)!
+      pinkyNode = (childNode(withName: "Pinky") as? GhostNode)!
+      clydeNode = (childNode(withName: "Clyde") as? GhostNode)!
+      
+      blinkyNode!.run(makeGhostAction(node: blinkyNode!))
+      inkyNode!.run(makeGhostAction(node: inkyNode!))
+      pinkyNode!.run(makeGhostAction(node: pinkyNode!))
+      clydeNode!.run(makeGhostAction(node: clydeNode!))
+
+      pacManNode = (childNode(withName: "PacManNode") as? SKShapeNode)!
       pacManNode!.fillColor = UIColor.yellow
       pacManNode!.physicsBody = SKPhysicsBody(circleOfRadius: PacManScene.pacManRadius)
       pacManNode!.physicsBody!.allowsRotation = false
