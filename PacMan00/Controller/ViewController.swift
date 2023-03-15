@@ -8,13 +8,12 @@ class ViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      let scene = SKScene(fileNamed: "PacMan")!
+      let scene = SKScene(fileNamed: "PacMan") as! PacManScene
       scene.scaleMode = .aspectFit
       skView!.presentScene(scene)
       
-      NotificationCenter.default.addObserver(forName: Notification.Name("didEatPellet"), object: nil, queue: nil, using: { (_ : Notification) in
-         self.score += 1
-         self.scoreLabel?.text = "\(self.score)"
+      NotificationCenter.default.addObserver(forName: Notification.Name("didChangeScore"), object: nil, queue: nil, using: { (n : Notification) in
+         self.scoreLabel?.text = "\(scene.score)"
       })
     }
    

@@ -8,6 +8,9 @@ class GhostNode : SKSpriteNode {
 }
 
 class VulnerableGhostNode : GhostNode {
+   static var consumptionPoints = 200 // Number of points for eating a vulnerable ghost
+   static let consumptionDeltaPoints = 200 // Increase in points for each consecutive ghost that's eaten
+
    var invulnerableNode : GhostNode?
 }
 
@@ -40,6 +43,7 @@ func replaceGhostWithVulnerableGhosts(_ ghost : GhostNode) {
             ghost.position = newGhost.position
             newGhost.parent!.addChild(ghost)
             newGhost.removeFromParent()
+            VulnerableGhostNode.consumptionPoints = 200 // Reset to eliminate bonus
          }
       }
    }
@@ -47,6 +51,7 @@ func replaceGhostWithVulnerableGhosts(_ ghost : GhostNode) {
 
 func replaceVulnerableGhostWithEyes(_ vulnerableGhost : VulnerableGhostNode) {
    if nil != vulnerableGhost.parent {
+      VulnerableGhostNode.consumptionPoints += VulnerableGhostNode.consumptionDeltaPoints
       let newEyesNode = PacManScene.eyesPrototype!.copy() as! SKSpriteNode
       newEyesNode.position = vulnerableGhost.position
       vulnerableGhost.parent!.addChild(newEyesNode)
