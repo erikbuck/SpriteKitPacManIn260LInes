@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030E5AB729C25F9900E84C4E /* Eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = 030E5AB629C25F9900E84C4E /* Eyes.png */; };
 		0310E35029C15B8700D430CE /* BlinkyC.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E34C29C15B8700D430CE /* BlinkyC.png */; };
 		0310E35129C15B8700D430CE /* BlinkyA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E34D29C15B8700D430CE /* BlinkyA.png */; };
 		0310E35229C15B8700D430CE /* BlinkyB.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E34E29C15B8700D430CE /* BlinkyB.png */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		030E5AB629C25F9900E84C4E /* Eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Eyes.png; sourceTree = "<group>"; };
 		0310E34C29C15B8700D430CE /* BlinkyC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlinkyC.png; sourceTree = "<group>"; };
 		0310E34D29C15B8700D430CE /* BlinkyA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlinkyA.png; sourceTree = "<group>"; };
 		0310E34E29C15B8700D430CE /* BlinkyB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlinkyB.png; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		97264D9A29C22C0E00BB239D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				030E5AB629C25F9900E84C4E /* Eyes.png */,
 				03A5916429C1652E009550B3 /* PowerPelletA.png */,
 				03A5916329C1652E009550B3 /* PowerPelletB.png */,
 				03A5916129C1651C009550B3 /* Pellet.png */,
@@ -268,6 +271,7 @@
 				0310E36D29C15EB700D430CE /* VulnerableA.png in Resources */,
 				9763017329BB91B700BD8CFA /* Main.storyboard in Resources */,
 				0310E36B29C15EB700D430CE /* InkyD.png in Resources */,
+				030E5AB729C25F9900E84C4E /* Eyes.png in Resources */,
 				0310E35229C15B8700D430CE /* BlinkyB.png in Resources */,
 				0310E36929C15EB700D430CE /* ClydeA.png in Resources */,
 			);

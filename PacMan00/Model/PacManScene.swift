@@ -129,6 +129,7 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
             // Respawn Pac Man after arbitrary period and restore Pac Man size to default
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
                self.pacManNode!.position = pacManStartPosition
+               self.pacManNode!.physicsBody!.velocity = CGVector()
                self.pacManNode!.removeFromParent()
                self.addChild(self.pacManNode!)
                self.pacManNode!.run(SKAction.scale(to: 1, duration: 0.2))
