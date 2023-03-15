@@ -25,6 +25,9 @@
 		0310E36D29C15EB700D430CE /* VulnerableA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E35F29C15EB700D430CE /* VulnerableA.png */; };
 		0310E36E29C15EB700D430CE /* InkyB.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E36029C15EB700D430CE /* InkyB.png */; };
 		0310E36F29C15EB700D430CE /* PinkyA.png in Resources */ = {isa = PBXBuildFile; fileRef = 0310E36129C15EB700D430CE /* PinkyA.png */; };
+		03A5916229C1651C009550B3 /* Pellet.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A5916129C1651C009550B3 /* Pellet.png */; };
+		03A5916529C1652E009550B3 /* PowerPelletB.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A5916329C1652E009550B3 /* PowerPelletB.png */; };
+		03A5916629C1652E009550B3 /* PowerPelletA.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A5916429C1652E009550B3 /* PowerPelletA.png */; };
 		9763016C29BB91B700BD8CFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763016B29BB91B700BD8CFA /* AppDelegate.swift */; };
 		9763016E29BB91B700BD8CFA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763016D29BB91B700BD8CFA /* SceneDelegate.swift */; };
 		9763017029BB91B700BD8CFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9763016F29BB91B700BD8CFA /* ViewController.swift */; };
@@ -54,6 +57,9 @@
 		0310E35F29C15EB700D430CE /* VulnerableA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VulnerableA.png; sourceTree = "<group>"; };
 		0310E36029C15EB700D430CE /* InkyB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InkyB.png; sourceTree = "<group>"; };
 		0310E36129C15EB700D430CE /* PinkyA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkyA.png; sourceTree = "<group>"; };
+		03A5916129C1651C009550B3 /* Pellet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pellet.png; sourceTree = "<group>"; };
+		03A5916329C1652E009550B3 /* PowerPelletB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PowerPelletB.png; sourceTree = "<group>"; };
+		03A5916429C1652E009550B3 /* PowerPelletA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PowerPelletA.png; sourceTree = "<group>"; };
 		9763016829BB91B700BD8CFA /* PacMan00.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PacMan00.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9763016B29BB91B700BD8CFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9763016D29BB91B700BD8CFA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +133,9 @@
 		9763018129BB91DB00BD8CFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				03A5916429C1652E009550B3 /* PowerPelletA.png */,
+				03A5916329C1652E009550B3 /* PowerPelletB.png */,
+				03A5916129C1651C009550B3 /* Pellet.png */,
 				0310E35B29C15EB700D430CE /* ClydeA.png */,
 				0310E35C29C15EB700D430CE /* ClydeB.png */,
 				0310E35529C15EB600D430CE /* ClydeC.png */,
@@ -211,16 +220,19 @@
 			files = (
 				0310E36529C15EB700D430CE /* PinkyD.png in Resources */,
 				0310E35129C15B8700D430CE /* BlinkyA.png in Resources */,
+				03A5916229C1651C009550B3 /* Pellet.png in Resources */,
 				0310E36629C15EB700D430CE /* ClydeD.png in Resources */,
 				0310E36329C15EB700D430CE /* ClydeC.png in Resources */,
 				9763017829BB91B800BD8CFA /* LaunchScreen.storyboard in Resources */,
 				0310E36F29C15EB700D430CE /* PinkyA.png in Resources */,
 				9763018329BB92C300BD8CFA /* PacMan.sks in Resources */,
+				03A5916529C1652E009550B3 /* PowerPelletB.png in Resources */,
 				0310E36C29C15EB700D430CE /* VulnerableB.png in Resources */,
 				0310E36729C15EB700D430CE /* InkyC.png in Resources */,
 				0310E35329C15B8700D430CE /* BlinkyD.png in Resources */,
 				0310E36E29C15EB700D430CE /* InkyB.png in Resources */,
 				0310E36829C15EB700D430CE /* PinkyB.png in Resources */,
+				03A5916629C1652E009550B3 /* PowerPelletA.png in Resources */,
 				9763017529BB91B800BD8CFA /* Assets.xcassets in Resources */,
 				0310E36429C15EB700D430CE /* PinkyC.png in Resources */,
 				0310E36A29C15EB700D430CE /* ClydeB.png in Resources */,
