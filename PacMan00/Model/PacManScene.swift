@@ -2,7 +2,7 @@ import SpriteKit
 
 class WallNode : SKSpriteNode {}
 class GhostNode : SKSpriteNode {}
-class VulnerableGhostNode : SKSpriteNode {}
+class VulnerableGhostNode : GhostNode {}
 
 let pacManSpeed = CGFloat(10)
 let ghostSpeed = CGFloat(10)
@@ -121,21 +121,37 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
       pacManNode!.path = path.cgPath
    }
    
+   func replaceGhostWithVulnerableGhosts(_ ghost : GhostNode) {
+      vulnerableGhost!.removeFromParent()
+      let newGhost = vulnerableGhost!.copy() as! VulnerableGhostNode
+      newGhost.position = ghost.position
+      addChild(newGhost)
+      ghost.removeFromParent()
+      newGhost.run(makeGhostAction(node: newGhost))
+   }
+   
    // MARK: - Physics Collisions
    func didBegin(_ contact: SKPhysicsContact) {
       if contact.bodyA.node?.name == "PacManNode" || contact.bodyB.node?.name == "PacManNode" {
          if contact.bodyA.node?.name == "Pellet" {
             contact.bodyA.node?.removeFromParent()
+            NotificationCenter.default.post(Notification(name: Notification.Name("didEatPellet")))
          } else if contact.bodyB.node?.name == "Pellet"{
             contact.bodyB.node?.removeFromParent()
+            NotificationCenter.default.post(Notification(name: Notification.Name("didEatPellet")))
          } else if contact.bodyA.node?.name == "PowerPellet" {
             contact.bodyA.node?.removeFromParent()
-            vulnerableGhost!.removeFromParent()
-            addChild(vulnerableGhost!)
+            replaceGhostWithVulnerableGhosts(blinkyNode!)
+            replaceGhostWithVulnerableGhosts(inkyNode!)
+            replaceGhostWithVulnerableGhosts(pinkyNode!)
+            replaceGhostWithVulnerableGhosts(clydeNode!)
          } else if contact.bodyB.node?.name == "PowerPellet"{
             contact.bodyB.node?.removeFromParent()
-            vulnerableGhost!.removeFromParent()
-            addChild(vulnerableGhost!)
+            replaceGhostWithVulnerableGhosts(blinkyNode!)
+            replaceGhostWithVulnerableGhosts(blinkyNode!)
+            replaceGhostWithVulnerableGhosts(inkyNode!)
+            replaceGhostWithVulnerableGhosts(pinkyNode!)
+            replaceGhostWithVulnerableGhosts(clydeNode!)
          } else if (contact.bodyA.node?.name ?? "").starts(with: "Ghost") ||
                      (contact.bodyB.node?.name ?? "").starts(with: "Ghost") {
             
