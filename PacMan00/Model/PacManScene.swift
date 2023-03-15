@@ -1,30 +1,9 @@
 import SpriteKit
 
 class WallNode : SKSpriteNode {}
-class GhostNode : SKSpriteNode {}
-class VulnerableGhostNode : GhostNode {}
 
 let pacManSpeed = CGFloat(10)
-let ghostSpeed = CGFloat(10)
-let ghostDecisionPeriodSeconds = 0.2
 let pacManStartPosition = CGPoint(x: 10, y: -10) // Arbitrary not inside maze walls
-
-/// Make the Action that controls Ghost behavior. In future, consider different Actions for each ghost so they have "personality".
-func makeGhostAction(node : GhostNode) -> SKAction {
-   return SKAction.repeatForever(SKAction.sequence(
-      [SKAction.wait(forDuration: ghostDecisionPeriodSeconds),
-       SKAction.run {
-          let dx = node.physicsBody!.velocity.dx
-          let dy = node.physicsBody!.velocity.dy
-          if abs(dx) < ghostSpeed && abs(dy) < ghostSpeed {
-             let direction = PacManScene.Direction.allCases.randomElement()!
-             var newVelocity = PacManScene.directionVectors[direction.rawValue]
-             newVelocity.dx *= ghostSpeed; newVelocity.dy *= ghostSpeed
-             node.physicsBody!.velocity = newVelocity
-          }
-       }]))
-}
-
 let wackawackaPlaySoundAction = SKAction.playSoundFileNamed("wackawacka", waitForCompletion: false)
 let deathPlaySoundAction = SKAction.playSoundFileNamed("death", waitForCompletion: false)
 
@@ -42,6 +21,15 @@ func makePacManAction(node : SKNode) -> SKAction {
        }]))
 }
 
+//
+func makePacManDeathAction() -> SKAction {
+   let soundRepeatPeriodSeconds = 0.5
+   return SKAction.sequence([deathPlaySoundAction,
+                             SKAction.scale(to: 1.5, duration: 0.2),
+                             SKAction.scale(to: 0.5, duration: 0.5),
+                             SKAction.removeFromParent()])
+}
+
 class PacManScene : SKScene, SKPhysicsContactDelegate
 {
    static let pacManRadius = CGFloat(9) // Arbitrary small enough to not scrape edges of maze
@@ -57,31 +45,23 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
                                     CGFloat.pi * 1.0,   // left
                                     CGFloat.pi * 0.0,   // right
    ]
-   var blinkyNode : GhostNode?
-   var inkyNode : GhostNode?
-   var pinkyNode : GhostNode?
-   var clydeNode : GhostNode?
-   var vulnerableGhost : VulnerableGhostNode?
+   static var vulnerableGhostPrototype : VulnerableGhostNode?
+   static var eyesPrototype : SKSpriteNode?
+   var namedGhosts = Dictionary<String, GhostNode>()
    var pacManNode : SKShapeNode?
    var pacManMouthAngleRad = CGFloat.pi * 0.25  // Arbitrary initial angle
    var pacManMouthAngleDeltaRad = CGFloat(-0.05) // Arbitrary small change
    var pacManDirection = Direction.Left { didSet { movePacMan() } }
-   
+
    // MARK: - Initialization
    override func didMove(to view: SKView) {
       physicsWorld.contactDelegate = self
       
-      blinkyNode = (childNode(withName: "GhostBlinky") as? GhostNode)!
-      inkyNode = (childNode(withName: "GhostInky") as? GhostNode)!
-      pinkyNode = (childNode(withName: "GhostPinky") as? GhostNode)!
-      clydeNode = (childNode(withName: "GhostClyde") as? GhostNode)!
-      vulnerableGhost = (childNode(withName: "GhostVulnerable") as? VulnerableGhostNode)!
-      vulnerableGhost?.removeFromParent()
-      
-      blinkyNode!.run(makeGhostAction(node: blinkyNode!))
-      inkyNode!.run(makeGhostAction(node: inkyNode!))
-      pinkyNode!.run(makeGhostAction(node: pinkyNode!))
-      clydeNode!.run(makeGhostAction(node: clydeNode!))
+      PacManScene.vulnerableGhostPrototype = (childNode(withName: "GhostVulnerable") as? VulnerableGhostNode)!
+      PacManScene.vulnerableGhostPrototype!.removeFromParent()
+      PacManScene.eyesPrototype = (childNode(withName: "EyesPrototype") as? SKSpriteNode)!
+      PacManScene.eyesPrototype!.removeFromParent()
+      initGhosts(scene: self, names: ["GhostBlinky", "GhostInky", "GhostPinky", "GhostClyde"])
       
       pacManNode = (childNode(withName: "PacManNode") as? SKShapeNode)!
       pacManNode!.position = pacManStartPosition
@@ -120,16 +100,7 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
       path.addLine(to: CGPoint())
       pacManNode!.path = path.cgPath
    }
-   
-   func replaceGhostWithVulnerableGhosts(_ ghost : GhostNode) {
-      vulnerableGhost!.removeFromParent()
-      let newGhost = vulnerableGhost!.copy() as! VulnerableGhostNode
-      newGhost.position = ghost.position
-      addChild(newGhost)
-      ghost.removeFromParent()
-      newGhost.run(makeGhostAction(node: newGhost))
-   }
-   
+
    // MARK: - Physics Collisions
    func didBegin(_ contact: SKPhysicsContact) {
       if contact.bodyA.node?.name == "PacManNode" || contact.bodyB.node?.name == "PacManNode" {
@@ -141,30 +112,19 @@ class PacManScene : SKScene, SKPhysicsContactDelegate
             NotificationCenter.default.post(Notification(name: Notification.Name("didEatPellet")))
          } else if contact.bodyA.node?.name == "PowerPellet" {
             contact.bodyA.node?.removeFromParent()
-            replaceGhostWithVulnerableGhosts(blinkyNode!)
-            replaceGhostWithVulnerableGhosts(inkyNode!)
-            replaceGhostWithVulnerableGhosts(pinkyNode!)
-            replaceGhostWithVulnerableGhosts(clydeNode!)
+            for ghostNode in namedGhosts.values { replaceGhostWithVulnerableGhosts(ghostNode) }
          } else if contact.bodyB.node?.name == "PowerPellet"{
             contact.bodyB.node?.removeFromParent()
-            replaceGhostWithVulnerableGhosts(blinkyNode!)
-            replaceGhostWithVulnerableGhosts(blinkyNode!)
-            replaceGhostWithVulnerableGhosts(inkyNode!)
-            replaceGhostWithVulnerableGhosts(pinkyNode!)
-            replaceGhostWithVulnerableGhosts(clydeNode!)
+            for ghostNode in namedGhosts.values { replaceGhostWithVulnerableGhosts(ghostNode) }
          } else if (contact.bodyA.node?.name ?? "").starts(with: "GhostVulnerable") {
-            contact.bodyA.node?.removeFromParent()
-            
+            replaceVulnerableGhostWithEyes(contact.bodyA.node as! VulnerableGhostNode)
          } else if (contact.bodyB.node?.name ?? "").starts(with: "GhostVulnerable") {
-            contact.bodyB.node?.removeFromParent()
+            replaceVulnerableGhostWithEyes(contact.bodyB.node as! VulnerableGhostNode)
          } else if (contact.bodyA.node?.name ?? "").starts(with: "Ghost") ||
                      (contact.bodyB.node?.name ?? "").starts(with: "Ghost") {
             
             // Create expand and "pop" animation using arbitrary scale factors and periods
-            pacManNode!.run(SKAction.sequence([deathPlaySoundAction,
-                                               SKAction.scale(to: 1.5, duration: 0.2),
-                                               SKAction.scale(to: 0.5, duration: 0.5),
-                                               SKAction.removeFromParent()]))
+            pacManNode!.run(makePacManDeathAction())
             
             // Respawn Pac Man after arbitrary period and restore Pac Man size to default
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
