@@ -6,11 +6,9 @@ class ViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      let view = self.skView!
       let scene = SKScene(fileNamed: "PacMan")!
       scene.scaleMode = .aspectFit
-      view.presentScene(scene)
-      view.showsFPS = true
+      skView!.presentScene(scene)
     }
    
    static let motionDetectDelta = CGFloat(20)
@@ -28,4 +26,3 @@ class ViewController: UIViewController {
       }
    }
 }
-
