@@ -87,6 +87,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		97264D9A29C22C0E00BB239D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				03A5916429C1652E009550B3 /* PowerPelletA.png */,
+				03A5916329C1652E009550B3 /* PowerPelletB.png */,
+				03A5916129C1651C009550B3 /* Pellet.png */,
+				0310E35B29C15EB700D430CE /* ClydeA.png */,
+				0310E35C29C15EB700D430CE /* ClydeB.png */,
+				0310E35529C15EB600D430CE /* ClydeC.png */,
+				0310E35829C15EB600D430CE /* ClydeD.png */,
+				0310E35429C15EB600D430CE /* InkyA.png */,
+				0310E36029C15EB700D430CE /* InkyB.png */,
+				0310E35929C15EB700D430CE /* InkyC.png */,
+				0310E35D29C15EB700D430CE /* InkyD.png */,
+				0310E36129C15EB700D430CE /* PinkyA.png */,
+				0310E35A29C15EB700D430CE /* PinkyB.png */,
+				0310E35629C15EB600D430CE /* PinkyC.png */,
+				0310E35729C15EB600D430CE /* PinkyD.png */,
+				0310E35F29C15EB700D430CE /* VulnerableA.png */,
+				0310E35E29C15EB700D430CE /* VulnerableB.png */,
+				0310E34D29C15B8700D430CE /* BlinkyA.png */,
+				0310E34E29C15B8700D430CE /* BlinkyB.png */,
+				0310E34C29C15B8700D430CE /* BlinkyC.png */,
+				0310E34F29C15B8700D430CE /* BlinkyD.png */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		97264D9B29C22C1B00BB239D /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				97AD303D29C2120C00FFD797 /* death.mp3 */,
+				97AD303B29C20E9800FFD797 /* wackawacka.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		9763015F29BB91B700BD8CFA = {
 			isa = PBXGroup;
 			children = (
@@ -137,29 +174,8 @@
 		9763018129BB91DB00BD8CFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				97AD303D29C2120C00FFD797 /* death.mp3 */,
-				97AD303B29C20E9800FFD797 /* wackawacka.mp3 */,
-				03A5916429C1652E009550B3 /* PowerPelletA.png */,
-				03A5916329C1652E009550B3 /* PowerPelletB.png */,
-				03A5916129C1651C009550B3 /* Pellet.png */,
-				0310E35B29C15EB700D430CE /* ClydeA.png */,
-				0310E35C29C15EB700D430CE /* ClydeB.png */,
-				0310E35529C15EB600D430CE /* ClydeC.png */,
-				0310E35829C15EB600D430CE /* ClydeD.png */,
-				0310E35429C15EB600D430CE /* InkyA.png */,
-				0310E36029C15EB700D430CE /* InkyB.png */,
-				0310E35929C15EB700D430CE /* InkyC.png */,
-				0310E35D29C15EB700D430CE /* InkyD.png */,
-				0310E36129C15EB700D430CE /* PinkyA.png */,
-				0310E35A29C15EB700D430CE /* PinkyB.png */,
-				0310E35629C15EB600D430CE /* PinkyC.png */,
-				0310E35729C15EB600D430CE /* PinkyD.png */,
-				0310E35F29C15EB700D430CE /* VulnerableA.png */,
-				0310E35E29C15EB700D430CE /* VulnerableB.png */,
-				0310E34D29C15B8700D430CE /* BlinkyA.png */,
-				0310E34E29C15B8700D430CE /* BlinkyB.png */,
-				0310E34C29C15B8700D430CE /* BlinkyC.png */,
-				0310E34F29C15B8700D430CE /* BlinkyD.png */,
+				97264D9B29C22C1B00BB239D /* Sounds */,
+				97264D9A29C22C0E00BB239D /* Components */,
 				9763018229BB92C300BD8CFA /* PacMan.sks */,
 				9763018C29BB967000BD8CFA /* PacManScene.swift */,
 			);
