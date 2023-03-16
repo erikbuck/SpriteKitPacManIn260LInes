@@ -17,4 +17,4 @@ This is an in-class example program created in March 2023 for Wright State Unive
 - Sprite Kit Actions implement animations and game logic that isn't provided for free by the physics engine.
 - Original sound effects were recorded in class on a terrible microphone.
 
-## Note The 260 lines citation includes blank lines and comments but does not include code provided by the Xcode project template for SpriteKit Games.
+**Note** The 260 lines citation includes blank lines and comments but does not include code provided by the Xcode project template for SpriteKit Games.
